@@ -12,13 +12,17 @@ import { Copyright } from '../copyright';
 import { styles } from './styles';
 import { Option } from '../option';
 import { feedbackTypes } from '../../utils/feedbackTypes'
-
+import { FeedbackType } from '../widget'
 interface Props extends TouchableOpacityProps {
     title: string;
-    image: ImageProps
+    image: ImageProps;
 }
 
-export function Options() {
+interface Props {
+    onFeedbackTypeChanged: (feedbackType: FeedbackType) => void
+}
+
+export function Options({ onFeedbackTypeChanged }: Props) {
     return (
         <View style={styles.container}
         >
@@ -33,7 +37,8 @@ export function Options() {
                             <Option
                                 key={key}
                                 title={value.title}
-                                image={value.image} />
+                                image={value.image}
+                                onPress={() => onFeedbackTypeChanged(key as FeedbackType)} />
                         )
                     })}
             </View>
